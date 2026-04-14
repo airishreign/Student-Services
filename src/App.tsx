@@ -19,10 +19,13 @@ import { FormsPage } from "./FormsPage";
 import { PulloutForm } from "./PullOut";
 import { TrackingPage } from "./TrackingPage";
 import { CalendarPage } from "./CalendarPage";
+import { HandbookPage } from "./HandbookPage";
 import { GoodMoralPage, ServicesPage, OrganizationsPage } from "./InfoPages";
 import { CounselorPage, EvaluationPage } from "./StudentPages";
-import { HandbookPage } from "./HandbookPage";
 import { ApproveForms, ManageUsersPage } from "./AdminPages";
+import { ProgramOfActivitiesForm } from "./ProgramOfActivitiesForm";
+import { NonUniformForm } from "./NonUniformForm";
+import { ExternalGuestForm } from "./ExternalGuestForm";
 
 export default function App() {
   const [users, setUsers] = useState<User[]>(INITIAL_USERS);
@@ -82,44 +85,32 @@ export default function App() {
       if (!currentUser) return;
       const statusVal: FormStatus = action === "approve" ? "approved" : "rejected";
       setForms((prev) => {
-        let poaToSchedule: FormApplication | null = null as FormApplication | null;
+        let poaToSchedule: FormApplication | null = null;
         const updatedForms = prev.map((f) => {
           if (f.id !== id) return f;
           const updated = { ...f };
           if (currentUser.role === "DEAN") updated.deanStatus = statusVal;
           if (currentUser.role === "CSAO") updated.csaoStatus = statusVal;
           if (currentUser.role === "STUDENT_SERVICES") updated.studentServicesStatus = statusVal;
-          const allApproved =
-            updated.deanStatus === "approved" &&
-            updated.csaoStatus === "approved" &&
-            updated.studentServicesStatus === "approved";
-          const anyRejected =
-            updated.deanStatus === "rejected" ||
-            updated.csaoStatus === "rejected" ||
-            updated.studentServicesStatus === "rejected";
+          const allApproved = updated.deanStatus === "approved" && updated.csaoStatus === "approved" && updated.studentServicesStatus === "approved";
+          const anyRejected = updated.deanStatus === "rejected" || updated.csaoStatus === "rejected" || updated.studentServicesStatus === "rejected";
           updated.status = allApproved ? "approved" : anyRejected ? "rejected" : "pending";
-          // If POA is just now approved, schedule it
-          if (
-            allApproved &&
-            updated.type === "program_of_activities" &&
-            f.status !== "approved"
-          ) {
+          if (allApproved && updated.type === "program_of_activities" && f.status !== "approved") {
             poaToSchedule = { ...updated };
           }
           return updated;
         });
-        // Schedule POA event if needed
         if (poaToSchedule) {
           const poa = poaToSchedule;
           setEvents((prevEvents) => [
             ...prevEvents,
             {
               id: `ev-poa-${poa.id}`,
-              title: poa.details.activityName || "Program of Activities",
-              date: poa.date,
+              title: ((poa as FormApplication).details as any)?.title || "Program of Activities",
+              date: (poa as FormApplication).date,
               type: "activity",
-              org: poa.details.org || undefined,
-              formId: poa.id,
+              org: ((poa as FormApplication).details as any)?.organization || undefined,
+              formId: (poa as FormApplication).id,
             },
           ]);
         }
@@ -140,14 +131,8 @@ export default function App() {
           if (currentUser.role === "DEAN") updated.deanStatus = statusVal;
           if (currentUser.role === "CSAO") updated.csaoStatus = statusVal;
           if (currentUser.role === "STUDENT_SERVICES") updated.studentServicesStatus = statusVal;
-          const allApproved =
-            updated.deanStatus === "approved" &&
-            updated.csaoStatus === "approved" &&
-            updated.studentServicesStatus === "approved";
-          const anyRejected =
-            updated.deanStatus === "rejected" ||
-            updated.csaoStatus === "rejected" ||
-            updated.studentServicesStatus === "rejected";
+          const allApproved = updated.deanStatus === "approved" && updated.csaoStatus === "approved" && updated.studentServicesStatus === "approved";
+          const anyRejected = updated.deanStatus === "rejected" || updated.csaoStatus === "rejected" || updated.studentServicesStatus === "rejected";
           updated.status = allApproved ? "approved" : anyRejected ? "rejected" : "pending";
           return updated;
         })
@@ -164,8 +149,6 @@ export default function App() {
     setUsers((prev) => prev.filter((u) => u.id !== id));
   }, []);
 
-  // ─── Auth Gate ───────────────────────────────────────────────────────────────
-
   if (!currentUser) {
     return authPage === "login" ? (
       <LoginPage
@@ -180,8 +163,6 @@ export default function App() {
       />
     );
   }
-
-  // ─── Page Routing ────────────────────────────────────────────────────────────
 
   const renderPage = () => {
     switch (currentPage) {

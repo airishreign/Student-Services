@@ -1,0 +1,1 @@
+# Forms White Screen Fix TODO\n\n1. ✅ Plan created\n2. Implement full POA form in FormsPage.tsx\n3. Implement Non-Uniform form\n4. Implement External Guest form\n5. Test all forms render (no white screen)\n6. Update App.tsx if needed\n7. Deploy to GitHub Pages\n8. Complete

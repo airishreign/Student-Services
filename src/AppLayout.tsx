@@ -67,9 +67,9 @@ export function AppLayout({
       >
         <div style={{ padding: "28px 20px 18px", borderBottom: "1px solid rgba(255,255,255,0.1)" }}>
           <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
-            <GreenLogo />
+<img src="./assets/DLSL.png" alt="DLSL" style={{ height: 36, width: 'auto' }} />
             <div>
-              <div style={{ color: "#fff", fontWeight: 800, fontSize: 15, lineHeight: 1.2 }}>DLSL Student</div>
+              <div style={{ color: "#fff", fontWeight: 800, fontSize: 15, lineHeight: 1.2 }}>Student</div>
               <div style={{ color: "#a8e6c3", fontSize: 13 }}>Services Portal</div>
             </div>
           </div>

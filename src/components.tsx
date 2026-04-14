@@ -68,6 +68,65 @@ export const Input = ({
   </div>
 );
 
+// ─── FileInput ────────────────────────────────────────────────────────────────
+
+export const FileInput = ({
+  label,
+  id,
+  onChange,
+  error,
+  accept,
+  multiple = false,
+}: {
+  label: string;
+  id: string;
+  onChange: (files: File[]) => void;
+  error?: string;
+  accept?: string;
+  multiple?: boolean;
+}) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (e.target.files) {
+      const filesArray = Array.from(e.target.files);
+      if (multiple) {
+        onChange(filesArray.slice(0, 5)); // Limit to 5 files
+      } else {
+        onChange(filesArray);
+      }
+    }
+  };
+
+  return (
+    <div style={{ marginBottom: 20 }}>
+      <label
+        htmlFor={id}
+        style={{ display: "block", fontSize: 15, fontWeight: 600, color: "#1a7a4a", marginBottom: 6 }}
+      >
+        {label}
+      </label>
+      <input
+        id={id}
+        type="file"
+        onChange={handleChange}
+        accept={accept}
+        multiple={multiple}
+        style={{
+          width: "100%",
+          padding: "14px 16px",
+          border: `1.5px solid ${error ? "#dc2626" : "#c6e8d8"}`,
+          borderRadius: 8,
+          fontSize: 16,
+          background: "#fff",
+          boxSizing: "border-box",
+          cursor: "pointer",
+        }}
+      />
+      {multiple && <p style={{ fontSize: 12, color: "#666", marginTop: 4 }}>Upload up to 5 supported files. Max 100 MB per file.</p>}
+      {error && <p style={{ color: "#dc2626", fontSize: 14, margin: "4px 0 0" }}>{error}</p>}
+    </div>
+  );
+};
+
 // ─── Select ───────────────────────────────────────────────────────────────────
 
 export const Select = ({
