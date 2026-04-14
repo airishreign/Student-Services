@@ -1,7 +1,16 @@
 import React from "react";
+import DLSLLogoImg from "../assets/DLSL.png";
+
+// ─── DLSLLogo ────────────────────────────────────────────────────────────────
+export const DLSLLogo = () => (
+  <img 
+    src={DLSLLogoImg} 
+    alt="DLSL" 
+    style={{ width: 36, height: 36, borderRadius: 6 }} 
+  />
+);
 
 // ─── GreenLogo ────────────────────────────────────────────────────────────────
-
 export const GreenLogo = () => (
   <svg width="36" height="36" viewBox="0 0 32 32" fill="none">
     <rect width="32" height="32" rx="8" fill="#1a7a4a" />
@@ -11,7 +20,6 @@ export const GreenLogo = () => (
 );
 
 // ─── Input ────────────────────────────────────────────────────────────────────
-
 export const Input = ({
   label,
   id,
@@ -69,7 +77,6 @@ export const Input = ({
 );
 
 // ─── FileInput ────────────────────────────────────────────────────────────────
-
 export const FileInput = ({
   label,
   id,
@@ -128,7 +135,6 @@ export const FileInput = ({
 };
 
 // ─── Select ───────────────────────────────────────────────────────────────────
-
 export const Select = ({
   label,
   id,
@@ -184,7 +190,6 @@ export const Select = ({
 );
 
 // ─── Textarea ─────────────────────────────────────────────────────────────────
-
 export const Textarea = ({
   label,
   id,
@@ -234,7 +239,6 @@ export const Textarea = ({
 );
 
 // ─── Btn ──────────────────────────────────────────────────────────────────────
-
 export const Btn = ({
   children,
   onClick,
@@ -283,7 +287,6 @@ export const Btn = ({
 };
 
 // ─── Card ─────────────────────────────────────────────────────────────────────
-
 export const Card = ({
   children,
   style,
@@ -305,7 +308,6 @@ export const Card = ({
 );
 
 // ─── PageTitle ────────────────────────────────────────────────────────────────
-
 export const PageTitle = ({ children }: { children: string }) => (
   <h2
     style={{
@@ -323,7 +325,6 @@ export const PageTitle = ({ children }: { children: string }) => (
 );
 
 // ─── Alert ────────────────────────────────────────────────────────────────────
-
 export const Alert = ({
   type,
   children,

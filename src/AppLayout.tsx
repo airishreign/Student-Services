@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { User, Page, ROLE_LABELS, Role } from "./types";
-import { GreenLogo } from "./components";
+import { DLSLLogo } from "./components";
 import { Home, FileText, Search, Calendar, Award, Settings, Users, UserCheck, Star, Book, CheckSquare, UserCog } from "lucide-react";
 
 const NAV_ITEMS: Record<Role, { label: string; page: Page; icon: React.ReactNode }[]> = {
@@ -66,8 +66,9 @@ export function AppLayout({
         }}
       >
         <div style={{ padding: "28px 20px 18px", borderBottom: "1px solid rgba(255,255,255,0.1)" }}>
-          <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
-<img src="./assets/DLSL.png" alt="DLSL" style={{ height: 36, width: 'auto' }} />
+<div style={{ display: "flex", alignItems: "center", gap: 12 }}>
+
+            <DLSLLogo />
             <div>
               <div style={{ color: "#fff", fontWeight: 800, fontSize: 15, lineHeight: 1.2 }}>Student</div>
               <div style={{ color: "#a8e6c3", fontSize: 13 }}>Services Portal</div>
