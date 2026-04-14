@@ -1,0 +1,1 @@
+# GitHub Pages Deployment TODO\n\n✅ 1. Create TODO.md with steps  \n✅ 2. Edit package.json: Update homepage to \"https://airishreign.github.io/Student-Services\"  \n✅ 3. Edit vite.config.ts: Update base to \"/Student-Services/\"  \n✅ 4. Commit changes  \n5. Run `npm run deploy`  \n6. Verify site at https://airishreign.github.io/Student-Services  \n7. Clean up TODO.md
